@@ -22,10 +22,10 @@ export function Summary() {
         <Button text="Finalizar a compra" variant="secondary"/>
       </div>
       <div className="flex flex-col gap-2 items-start">
-        <HelpLink />
-        <HelpLink />
-        <HelpLink />
-        <HelpLink />
+        <HelpLink text="Help" />
+        <HelpLink text="Reimbursement"/>
+        <HelpLink text="Delivery" />
+        <HelpLink text="Trades"/>
       </div>
     </aside>
   )

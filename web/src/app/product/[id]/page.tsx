@@ -1,6 +1,7 @@
 'use client'
 import { BackButton } from "@/components/BackButton";
 import { Button } from "@/components/ui/Button";
+import { Loading } from "@/components/ui/Loading";
 import { useCart } from "@/hook/useCart";
 import { getProduct } from "@/services/product";
 import { convertCoinBrl } from "@/utils/convert-to-coin-brl";
@@ -30,29 +31,32 @@ export default function Product() {
 
   async function fetchProduct() {
     try {
-      const res = await getProduct({ id : String(id) })
-      return res.Product 
+      const { product } = await getProduct({ id : String(id) })
+      return product
     } catch (error) {}
   }
 
-  const { data } = useQuery({ queryKey : 'product' , queryFn : fetchProduct})
+  const { data } = useQuery({ queryKey : `product-${id}` , queryFn : fetchProduct})
 
   useEffect(()=>{
     fetchProduct()
   },[])
 
+  if(data === undefined ) return <Loading />
+
   function handleAddToCart() {
     addItemToCart({ 
-      description : data.description , 
-      id : data.id,
-      imageUrl : data.imageUrl,
-      name : data.name,
-      priceInCents : data.priceInCents,
-      priceInCentsTotal : data.priceInCents,
+      description : data!.description , 
+      id : data!.id,
+      imageUrl : data!.imageUrl,
+      name : data!.name,
+      priceInCents : data!.priceInCents,
+      priceInCentsTotal : data!.priceInCents,
       quantity : 1
     })
     back()
   }
+
 
   return (
     <main className="min-h-[calc(100vh-80px)] w-full bg-background px-[5%]">

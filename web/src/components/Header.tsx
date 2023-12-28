@@ -22,7 +22,7 @@ export function Header() {
         <Input value={search} onChange={e => changeSearch( e.target.value )} placeholder="Search for any product" leftIcon={<CiSearch className="w-5 h-5" />} />
         <Link href="/cart" className="p-2 relative bg-transparent border-none">
           <FiShoppingBag className="w-6 h-6" />
-          {items.length > 0 && <div className="absolute text-xs h-[17px] w-[17px] bg-red-500 rounded-full text-white font-semibold flex items-center justify-center text-center right-0 bottom-0">
+          {( items?.length > 0 ) && <div className="absolute text-xs h-[17px] w-[17px] bg-red-500 rounded-full text-white font-semibold flex items-center justify-center text-center right-0 bottom-0">
             {items.length}
           </div>}
         </Link>

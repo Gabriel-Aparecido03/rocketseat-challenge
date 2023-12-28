@@ -20,17 +20,39 @@ interface getProductPropVariableType {
   id: string
 }
 
+interface getProductPropVariableTypeResponse {
+  product: undefined | {
+    id : string,
+    name: string,
+    description: string,
+    imageUrl : string,
+    priceInCents: number
+    category : string
+  }
+}
+
+type responseGraphQl = {
+  Product: undefined | {
+    id : string,
+    name: string,
+    description: string,
+    imageUrl : string,
+    priceInCents: number
+    category : string
+  }
+}
+
 interface getProductsPropVariableTypeResponse {
   allProducts: Product[]
-  _allProductsMeta : {
-    count : number
+  _allProductsMeta: {
+    count: number
   }
 }
 
 // sortField: '' , filter: $sortFilte
 
-async function getAllProduct({ sortField, page, perPage, sortOrder,filter }: getAllProductPropVariableType): Promise<getProductsPropVariableTypeResponse> {
-  const res : getProductsPropVariableTypeResponse = await graphQlClinet.request(gql`
+async function getAllProduct({ sortField, page, perPage, sortOrder, filter }: getAllProductPropVariableType): Promise<getProductsPropVariableTypeResponse> {
+  const res: getProductsPropVariableTypeResponse = await graphQlClinet.request(gql`
     query GET_PRODUCTS($page: Int, $perPage: Int, $sortOrder: String, $sortField: String ,$filter : ProductFilter) {
       allProducts(page: $page, perPage: $perPage, sortOrder: $sortOrder, sortField: $sortField ,filter : $filter) {
         id
@@ -51,8 +73,8 @@ async function getAllProduct({ sortField, page, perPage, sortOrder,filter }: get
   return res
 }
 
-async function getProduct({ id }: getProductPropVariableType) {
-  const res = await graphQlClinet.request(gql`
+async function getProduct({ id }: getProductPropVariableType): Promise<getProductPropVariableTypeResponse> {
+  const res: responseGraphQl = await graphQlClinet.request(gql`
   query GET_PRODUCT($id: ID!) {
     Product(id: $id) {
       id
@@ -66,8 +88,8 @@ async function getProduct({ id }: getProductPropVariableType) {
 `, {
     id
   })
-
-  return res
+  
+  return { product : res.Product }
 }
 
 export { getAllProduct, getProduct }

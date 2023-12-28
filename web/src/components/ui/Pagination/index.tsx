@@ -16,12 +16,12 @@ export function Pagination() {
         <ButtonPagination isSelect={page === 3} onClick={()=> { changePage(3)}} > 3 </ButtonPagination>
       </div>
       <div className="items-center gap-1 flex">
-        { page === 1 && <ButtonPagination 
+        { page !== 1 && <ButtonPagination 
           isSelect={false} 
-          onClick={()=> { changePage(page + 1 )}} > 
+          onClick={()=> { changePage(page - 1 )}} > 
           <IoChevronBack className="h-2 w-2" /> 
         </ButtonPagination> }
-        { page < 5 && <ButtonPagination 
+        { page !== 3 && <ButtonPagination 
           isSelect={false} 
           onClick={()=> { changePage(page + 1 )}} > 
           <IoChevronForward className="h-2 w-2" />

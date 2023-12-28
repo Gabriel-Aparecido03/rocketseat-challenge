@@ -24,7 +24,7 @@ export function CardCart({ description ,id,imageUrl,name,priceInCents,priceInCen
 
   function handleUpdateQuantity(newQuantity : number ) {
     setNewValueQuantity(newQuantity)
-    saveItemCart({ description , id, imageUrl ,name ,priceInCents ,priceInCentsTotal : priceInCents * newQuantity ,quantity })
+    saveItemCart({ description , id, imageUrl ,name ,priceInCents ,priceInCentsTotal : priceInCents * newQuantity ,quantity : newQuantity })
   }
 
   function handleDelete() {
@@ -43,7 +43,7 @@ export function CardCart({ description ,id,imageUrl,name,priceInCents,priceInCen
         </div>
         <p className="text-gray-500 text-xs text-start"> { description } </p>
         <div className="flex items-center gap-3">
-          <select value={newValueQuantity} onChange={e => handleUpdateQuantity(Number(e.target.value))} className="bg-[#F3F5F6] rounded-lg border border-solid border-[#A8A8B3]">
+          <select value={newValueQuantity} onChange={e => handleUpdateQuantity(Number(e.target.value))} className="bg-[#F3F5F6] rounded-lg border border-solid border-[#A8A8B3] px-2">
             <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>

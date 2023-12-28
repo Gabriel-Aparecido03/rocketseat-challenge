@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
 
 import { fireEvent, render } from '@testing-library/react'
-import { ButtonPagination } from './ButtonPagination'
-
+import { ButtonPagination } from '../Pagination/ButtonPagination'
+  
 describe('<Button />', () => {
 
   it('should be render correctly', () => {
